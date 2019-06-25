@@ -1,1 +1,4 @@
 DBNAME=testbaza
+USERNAME=root
+SERVER=localhost
+PASSWORD=
