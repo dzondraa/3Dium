@@ -12,7 +12,7 @@ function printArticle(article){
     <div class="card-body">
         <h5 class="card-title">${article.heading}</h5>
         <p class="card-text">${article.text}</p>
-        <a href="#" class="btn btn-primary">Read more</a>
+        <a href="index.php?page=singleArticle&id=${article.idArticle}" class="btn btn-primary">Read more</a>
     </div>
     </div>
     `;

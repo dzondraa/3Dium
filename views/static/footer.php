@@ -9,7 +9,9 @@
         switch($_GET['page']){
         case "addNew" : echo "<script src='assets/js/add.js'></script>"; break;
         case "update" : echo "<script src='assets/js/update.js'></script>"; break;
-        
+        case "singleArticle" : echo "<script src='assets/js/slider.js'></script>";
+        echo "<link rel='stylesheet' type='text/css' href='assets/css/gslider.css'>";
+        break;
         case "users" : echo "<script src='assets/js/users.js'></script>"; break;
     }
     }

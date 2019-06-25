@@ -100,6 +100,7 @@
             $upit = $conn->prepare($upit);
             $upit->execute([$id]);
             $art = $upit->fetchAll();
+            $art[0]->big = getAllPhotos($art[0]->idArticle);
             return $art[0];
         }
         catch(PDOException $ex){

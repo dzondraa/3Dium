@@ -5,6 +5,7 @@
             case "users" : include "views/pages/user.php"; break;
             case "addNew" : include "views/pages/addNew.php"; break;
             case "update" : include "views/pages/update.php"; break;
+            case "singleArticle" : include "views/pages/singleArticle.php"; break;
         }
     }
     else{
