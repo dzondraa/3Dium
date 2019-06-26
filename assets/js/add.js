@@ -1,6 +1,7 @@
 window.onload = function(){
     addEvent();
     addEventImg();
+    addEventDeletePhoto();
 }
 function printPhotos(data){
     let str = "";
@@ -66,9 +67,15 @@ function addEvent(){
             processData: false,
             success:function(data){
                 $("#formAdd").hide();
+                if(data == "updated"){
+                    mess = "Article updated!";
+                }
+                else{
+                    mess = "Article uploaded!";
+                }
                 document.querySelector("#cont").innerHTML = `
                 <div class="alert alert-success">
-                <strong>Success!</strong> Article uploaded!
+                <strong>Success!</strong> ${mess}
               </div>
                 `;
                 
@@ -95,7 +102,8 @@ function addEventImg(){
             processData: false,
             success:function(data){
                 console.log(data);
-                document.querySelector("#uploaded").innerHTML = printPhotos(data);   
+                document.querySelector("#uploaded").innerHTML = printPhotos(data);
+                addEventDeletePhoto();   
                 
             },
             error: function(e , ex){
@@ -108,15 +116,48 @@ function addEventImg(){
 } 
 function printPhotos(data){
     let str = "";
-    data.forEach(e => {
-        str += `
-        <div class="card" style="width: 10rem;">
-                <img class="card-img-top" src="${e.big}" alt="Article photo">
-                <div class="card-body">
-                  <a href="#" data-id="${e.idImg}" class="btn btn-primary">Delete</a>
-                </div>
-              </div>
-        `;
-    });
+    if(data.length == 0){
+        str = `<div class="alert alert-warning" role="alert">
+        No photos to show!
+      </div>`;
+    }
+    else{
+        data.forEach(e => {
+            str += `
+            <div class="card" style="width: 10rem;">
+                    <img class="card-img-top" src="${e.big}" alt="Article photo">
+                    <div class="card-body">
+                      <a href="#" data-id="${e.idImg}" class="btn btn-primary brisiSliku">Delete</a>
+                    </div>
+                  </div>
+            `;
+        });
+    }
+    
     return str;
+}
+function addEventDeletePhoto(){
+    $(".brisiSliku").click(function(){
+        let id = $(this).data("id");
+        deletePhoto(id);
+    });
+}
+function deletePhoto(id){
+        $.ajax({
+            url : "models/articles/deletePhotos.php",
+            method : "post" , 
+            dataType : "json",
+            data : {
+                id : id
+            },
+            success : function(data){
+            console.log(data);
+            document.querySelector("#uploaded").innerHTML = printPhotos(data);
+            addEventDeletePhoto();
+            },
+            error : function(e , ex){
+                console.log(e);
+                console.log("ERROR");
+            }
+        });
 }

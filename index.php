@@ -9,7 +9,7 @@
         }
     }
     else{
-        include "views/pages/main.php";
+        include "views/pages/login.php";
     }
 
     include "views/static/footer.php";

@@ -35,12 +35,16 @@
         $query = "SELECT * FROM images where idArticle = ? limit 1";
         $query = $conn->prepare($query);
         $query->execute([$id]);
-        $photos = $query->fetch();
+        $photos = $query->fetchAll();
         }
         catch(PDOException $ex){
             echo $ex->getMessage();
         }
-        return $photos->big;
+        if(count($photos) == 0){
+            return "assets/images/articles/none.png";
+        }else{
+        return $photos[0]->big;
+        }
     }
     function getAllArticles($limit){
         global $conn;
@@ -108,6 +112,38 @@
             
             
         }
+    }
+    function deletePhoto($id){
+        global $conn;
+        $quer = "DELETE FROM images where idImg = ?";
+        try{
+        $quer = $conn->prepare($quer);
+        $quer ->bindValue(1 , $id , PDO::PARAM_INT);
+        $succ = $quer->execute();
+        if($succ){
+            return true;
+        }
+        else{
+            return false;
+        }
+        }
+        catch(PDOException $ex){
+            echo $ex->getMessage();
+        }
+        
+    }
+    function getSinglePhoto($id){
+        global $conn;
+        try{
+        $query = "SELECT * FROM images where idImg = ?";
+        $query = $conn->prepare($query);
+        $query->execute([$id]);
+        $photos = $query->fetch();
+        }
+        catch(PDOException $ex){
+            echo $ex->getMessage();
+        }
+        return $photos->big;
     }
 
 ?>

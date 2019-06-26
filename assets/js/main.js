@@ -81,6 +81,7 @@ function brisanje(){
             success : function(data){
                 console.log(data);
                 document.querySelector("#bod").innerHTML = showTable(data);
+                brisanje();
                 
             },
             error : function(e , ex){
@@ -110,5 +111,6 @@ function showTable(data){
         `;
         br++;
     });
+    
     return str;
 }

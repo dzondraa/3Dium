@@ -7,13 +7,22 @@ if(isset($_POST['id'])){
     if($_POST['id'] > 0){
     $quer = "DELETE FROM images where idArticle = ?";
     $quer1 = "DELETE FROM articles where idArticle = ?";
+    $cek = true;
+    $photoss = getAllPhotos($_POST['id']);
+    foreach($photoss as $ph){
+        if(!unlink("../../".$ph->big)){
+            $cek = false;
+        }
+    }
     try{
+        if($cek){
         $quer = $conn->prepare($quer);
         $quer1 = $conn->prepare($quer1);
         $conn->beginTransaction();
         $quer->execute([$_POST['id']]);
         $quer1->execute([$_POST['id']]);
         $r = $conn->commit();
+        }
         if($r){
             echo json_encode(getArticlesById($_SESSION['idUser'] , null)); 
         }

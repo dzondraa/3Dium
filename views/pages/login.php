@@ -1,4 +1,3 @@
-@@ -0,0 +1,54 @@
 <div class="container">
         <div class="row">
 			<div class="col-md-5 mx-auto">

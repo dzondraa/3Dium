@@ -3,6 +3,7 @@
     include "models/articles/functions.php";
     if(isset($_GET['id'])){
       $article = getArticleByIdArt($_GET['id']);
+      $_SESSION['idArticle'] = $_GET['id'];
     }
 ?>
 <div class="container" id="cont">
@@ -54,7 +55,12 @@
 </button>
     <?php endif; ?>
 <br>
-  <input type="submit" id="create" class="btn btn-primary btn-lg btn-block" value="create">
+  <?php if(isset($_GET['id'])): ?>
+  <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
+    <?php endif; ?>
+  <input type="submit" id="create" class="btn btn-primary btn-lg btn-block" value="<?php if(isset($_GET['id'])){
+    echo "UPDATE";
+  }else{ echo "ADD ARTICLE"; } ?>">
 </form>
 
 
@@ -74,21 +80,26 @@
           <div id="uploaded" class="col-lg-12 d-flex justify-content-around flex-wrap">
             <?php
             $photos = getAllPhotos($_GET['id']);
+            if(count($photos)):
             foreach($photos as $photo):
             ?>
               <div class="card" style="width: 10rem;">
                 <img class="card-img-top" src="<?= $photo->big ?>" alt="Article photo">
                 <div class="card-body">
-                  <a href="#" data-id="<?= $photo->idImg?>" class="btn btn-primary">Delete</a>
+                  <a href="#" data-id="<?= $photo->idImg?>" class="btn btn-primary brisiSliku">Delete</a>
                 </div>
               </div>
 
-            <?php endforeach; ?>
+            <?php endforeach; endif;  if(count($photos) == 0):?>
+            <div class="alert alert-warning" role="alert">
+             No photos to show!
+             </div>
+            <?php endif; ?>
               <div class="col-lg-12" id="errors"></div>
           </div>
         <form id="form" method="post" action="models/articles/uploadImg.php" enctype="multipart/form-data">
         
-        <input type="file" name="file[]" multiple>
+        <input id="fix" type="file" name="file[]" multiple>
         <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
         <input type="submit" value="UPLOAD">
         
