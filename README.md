@@ -19,6 +19,8 @@ Turn on Apache and MySql in XAMPP control.
 
 Import the database at PhpMyAdmin. (Sql file for import is located at ../data/)
 
+Change DBNAME at at env file in config folder.
+
 Open app at your localhost.
 
 USERS FOR LOGIN
