@@ -21,6 +21,11 @@ Import the database at PhpMyAdmin. (Sql file for import is located at ../data/)
 
 Open app at your localhost.
 
+USERS FOR LOGIN
+```
+user:maja97-pass:maja97
+user:dzondra-pass:asdasd123
+```
 ### Test
 
 You can test all of functionality.(Adding, Removing, Updating, Listing articles, Adding photos).
