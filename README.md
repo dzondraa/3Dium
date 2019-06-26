@@ -24,8 +24,8 @@ Import the database at PhpMyAdmin. (Sql file for import is located at ../data/)
 ```
 
 Open app at your localhost.
-
-## Test
+```
+### Test
 
 You can test all of functionality.(Adding, Removing, Updating, Listing articles, Adding photos).
 
@@ -35,5 +35,3 @@ You can test all of functionality.(Adding, Removing, Updating, Listing articles,
 
 ## Authors
 *Djordje Nikolic - https://djordjenikolic.000webhostapp.com/
-
-
